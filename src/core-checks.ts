@@ -20,14 +20,14 @@ const checkPasswordIsValid = (password: string): boolean => {
 
 export const checkPasswordEnhanced = async (
   password: string
-): Promise<string> => {
+): Promise<{ status: boolean; message: string }> => {
   if (!checkPasswordIsValid(password)) {
-    return "Password is invalid";
+    return { status: true, message: "invalid" };
   }
 
   if (await checkIfPasswordIsCompromised(password)) {
-    return "Password is compromised";
+    return { status: true, message: "compromised" };
   }
 
-  return "Password is secure";
+  return { status: true, message: "valid & secure" };
 };
