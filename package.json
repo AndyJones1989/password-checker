@@ -1,0 +1,18 @@
+{
+  "name": "-password-verifier",
+  "version": "1.0.0",
+  "description": "a really simple demo application",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "andy j",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^3.3.2",
+    "tsc": "^2.0.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.9"
+  }
+}
