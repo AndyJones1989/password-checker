@@ -1,44 +1,9 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const crypto_1 = require("crypto");
 // > 8 chars
 // a capital
 // a lowercase
 // a number
 // an underscore
-const checkPasswordIsValid = (password) => {
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[_]).{8,}$/;
-    return regex.test(password);
-};
-const getSHA1Prefix = (password) => {
-    const sha1Hash = (0, crypto_1.createHash)("sha1").update(password).digest("hex");
-    return sha1Hash.substring(0, 5);
-};
-const checkIfPasswordIsCompromised = async (password) => {
-    const fullSHA1Hash = (0, crypto_1.createHash)("sha1")
-        .update(password)
-        .digest("hex")
-        .toUpperCase(); // Ensure uppercase to match API response
-    const prefix = fullSHA1Hash.substring(0, 5);
-    const suffix = fullSHA1Hash.substring(5);
-    const response = await fetch(`https://api.pwnedpasswords.com/range/${prefix}`);
-    if (response.ok) {
-        const data = await response.text();
-        const hashes = data.split("\n").map((line) => line.split(":")[0]);
-        return compareHashes(suffix, hashes); // Pass the suffix for comparison
-    }
-    throw new Error("Failed to fetch compromised passwords");
-};
-const compareHashes = (userHashSuffix, apiHashes) => {
-    return apiHashes.includes(userHashSuffix);
-};
-const checkPassword = async (password) => {
-    // if (!checkPasswordIsValid(password)) {
-    //     return 'Password is invalid';
-    // }
-    if (await checkIfPasswordIsCompromised(password)) {
-        return "Password is compromised";
-    }
-    return "Password is secure";
-};
-checkPassword("gYfds233£asQQQsriosW12!").then((res) => console.log(res));
+Object.defineProperty(exports, "__esModule", { value: true });
+const core_checks_1 = require("./core-checks");
+(0, core_checks_1.checkPassword)("gYfds233£asQQQsriosW12!").then((result) => console.log(result));
