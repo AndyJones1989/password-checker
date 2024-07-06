@@ -4,15 +4,23 @@
   "description": "a really simple demo application",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "jest",
+    "start": "tsc && node out/src/index.js"
   },
   "author": "andy j",
   "license": "ISC",
   "dependencies": {
     "node-fetch": "^3.3.2",
-    "tsc": "^2.0.4"
+    "tsc": "^2.0.4",
+    "typescript": "^5.5.3"
   },
   "devDependencies": {
-    "@types/node": "^20.14.9"
+    "@babel/preset-env": "^7.24.7",
+    "@babel/preset-typescript": "^7.24.7",
+    "@jest/globals": "^29.7.0",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.14.9",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.5"
   }
 }

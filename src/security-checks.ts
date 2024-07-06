@@ -5,7 +5,7 @@ interface SHA1HashObject {
   suffix: string;
 }
 
-const getSHA1Prefix = (password: string): SHA1HashObject => {
+export const getSHA1Prefix = (password: string): SHA1HashObject => {
   const sha1Hash = createHash("sha1")
     .update(password)
     .digest("hex")
